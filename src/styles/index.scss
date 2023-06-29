@@ -1,4 +1,6 @@
 @import "./globals/variables";
+@import "./globals/mixins";
+@import "./globals/typography";
 
 * {
   font-family: 'Atkinson Hyperlegible';
@@ -6,6 +8,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
 }
 
 html, body, #root, #app {
@@ -13,7 +16,6 @@ html, body, #root, #app {
   width: 100%;
   margin: 0;
   padding: 0;
-  transition: all 0.2s ease-in-out;
 }
 
 button.large {
@@ -28,9 +30,13 @@ button.large {
   }
 }
 
-button {
+button, a {
   border: none;
   color: $very-light-gray;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
     cursor: pointer;
@@ -49,10 +55,10 @@ button {
   }
 
   &.menuSelection {
-    height: 52px;
+    height: 40px;
     padding: 0 26px;
-    border-radius: 26px;
-    font-size: 26px;
+    border-radius: 20px;
+    font-size: 16px;
     background-color: $gray-blue;
     
     &.active {
@@ -61,6 +67,12 @@ button {
 
     &:hover {
       background-color: $slightly-desaturated-blue;
+    }
+
+    @include respond-to('small') {
+      height: 52px;
+      border-radius: 26px;
+      font-size: 26px;
     }
   }
 
@@ -73,6 +85,12 @@ button {
 
     &:hover {
       background-color: $light-orange;
+    }
+
+    @include respond-to('small') {
+      height: 70px;
+      border-radius: 35px;
+      font-size: 32px;
     }
   }
 

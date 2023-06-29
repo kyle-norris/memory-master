@@ -1,0 +1,88 @@
+@import "../globals/variables";
+@import "../globals/mixins";
+
+.background {
+  background-color: $very-dark-blue;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+.title {
+  font-size: 32px;
+  color: $very-light-gray;
+  margin-bottom: 45px;
+
+  @include respond-to("small") {
+    font-size: 40px;
+    margin-bottom: 78px;
+  }
+}
+
+.card {
+  background-color: $very-light-gray;
+  border-radius: 10px;
+  width: 327px;
+  height: 386px;
+  padding: 0px 24px;
+
+  @include respond-to("small") {
+    width: 654px;
+    height: 559px;
+    border-radius: 20px;
+    padding: 23px 56px;
+  }
+}
+
+h3 {
+  color: $desaturated-light-blue;
+  margin-bottom: 11px;
+  margin-top: 24px;
+
+  @include respond-to("small") {
+    margin-top: 33px;
+    margin-bottom: 16px;
+  }
+}
+
+.buttonRow {
+  display: flex;
+  justify-content: space-between;
+
+  &.row-1 > button {
+    width: 134px;
+
+    @include respond-to("small") {
+      width: 256px;
+    }
+  }
+
+  &.row-2 > button {
+    width: 62px;
+
+    @include respond-to("small") {
+      width: 119px;
+    }
+  }
+
+  &.row-3 > button {
+    width: 134px;
+
+    @include respond-to("small") {
+      width: 256px;
+    }
+  }
+
+  &.row-4 > a {
+    width: 279px;
+    margin-top: 32px;
+
+    @include respond-to("small") {
+      width: 541px;
+    }
+  }
+}
