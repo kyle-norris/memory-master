@@ -1,0 +1,64 @@
+@import "../globals/variables";
+@import "../globals/mixins";
+
+.background {
+  background-color: $very-light-gray;
+  padding: 24px;
+  height: 100%;
+}
+
+.background > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & > div {
+    font-size: 24px;
+    color: $very-dark-blue;
+
+    @include respond-to("small") {
+      font-size: 40px;
+    }
+  }
+}
+
+.menuBtns {
+  display: flex;
+}
+
+.menuBtn1, .menuBtn2 {
+  border: none;
+  color: $very-light-gray;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  padding: 0 26px;
+  border-radius: 26px;
+  font-size: 20px;
+  margin-left: 16px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.menuBtn1 {
+  background-color: $vivid-orange;
+  color: $very-light-gray;
+
+  &:hover {
+    background-color: $light-orange;
+  }
+}
+
+.menuBtn2 {
+  background-color: $light-gray;
+  color: $desaturated-blue;
+
+  &:hover {
+    background-color: $slightly-desaturated-blue;
+    color: $very-light-gray;
+  }
+}

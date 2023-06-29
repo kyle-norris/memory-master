@@ -94,12 +94,24 @@ button, a {
     }
   }
 
+  &.primary--small {
+    height: 40px;
+    padding: 0 26px;
+    border-radius: 20px;
+    font-size: 16px;
+    background-color: $vivid-orange;
+
+    &:hover {
+      background-color: $light-orange;
+    }
+  }
+
   &.secondary {
     height: 52px;
     padding: 0 26px;
     border-radius: 26px;
     font-size: 20px;
-    background-color: #DFE7EC;
+    background-color: $light-gray;
     color: $desaturated-blue;
 
     &:hover {

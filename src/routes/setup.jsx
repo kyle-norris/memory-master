@@ -1,4 +1,4 @@
-import "../styles/components/setup.scss";
+import styles from "../styles/components/setup.module.scss";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -30,12 +30,12 @@ function Setup() {
   }
 
   return (
-    <div className="background">
-      <div className="title">memory</div>
-      <div className="card">
-        <div className="row">
+    <div className={styles.background}>
+      <div className={styles.title}>memory</div>
+      <div className={styles.card}>
+        <div className={styles.row}>
           <h3>Select Theme</h3>
-          <div className="buttonRow row-1">
+          <div className={`${styles.buttonRow} ${styles.row1}`}>
             <button
               className={
                 gameSettings.theme == "numbers"
@@ -58,7 +58,7 @@ function Setup() {
             </button>
           </div>
           <h3>Number of Players</h3>
-          <div className="buttonRow row-2">
+          <div className={`${styles.buttonRow} ${styles.row2}`}>
             {[1, 2, 3, 4].map((num) => (
               <button
                 key={num}
@@ -74,7 +74,7 @@ function Setup() {
             ))}
           </div>
           <h3>Grid Size</h3>
-          <div className="buttonRow row-3">
+          <div className={`${styles.buttonRow} ${styles.row3}`}>
             <button
               className={
                 gameSettings.grid == 4
@@ -96,7 +96,7 @@ function Setup() {
               6x6
             </button>
           </div>
-          <div className="buttonRow row-4">
+          <div className={`${styles.buttonRow} ${styles.row4}`}>
             <Link to={buildGameRoute()} className="primary">
               Start Game
             </Link>
