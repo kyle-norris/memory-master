@@ -1,0 +1,92 @@
+@import "./globals/variables";
+
+* {
+  font-family: 'Atkinson Hyperlegible';
+  font-weight: 700;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root, #app {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+button.large {
+  height: 70px;
+  width: 541px;
+  background-color: $vivid-orange;
+  color: $very-light-gray;
+  font-size: 32px;
+
+  &:hover {
+    background-color: $light-orange;
+  }
+}
+
+button {
+  border: none;
+  color: $very-light-gray;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.large {
+    height: 70px;
+    width: 541px;
+    border-radius: 35px;
+    font-size: 32px;
+    background-color: $vivid-orange;
+
+    &:hover {
+      background-color: $light-orange;
+    }
+  }
+
+  &.menuSelection {
+    height: 52px;
+    padding: 0 26px;
+    border-radius: 26px;
+    font-size: 26px;
+    background-color: $gray-blue;
+    
+    &.active {
+      background-color: $desaturated-blue;
+    }
+
+    &:hover {
+      background-color: $slightly-desaturated-blue;
+    }
+  }
+
+  &.primary {
+    height: 52px;
+    padding: 0 26px;
+    border-radius: 26px;
+    font-size: 20px;
+    background-color: $vivid-orange;
+
+    &:hover {
+      background-color: $light-orange;
+    }
+  }
+
+  &.secondary {
+    height: 52px;
+    padding: 0 26px;
+    border-radius: 26px;
+    font-size: 20px;
+    background-color: #DFE7EC;
+    color: $desaturated-blue;
+
+    &:hover {
+      background-color: $slightly-desaturated-blue;
+      color: $very-light-gray;
+    }
+  }
+}
