@@ -1,0 +1,29 @@
+@import "../globals/variables";
+@import "../globals/mixins";
+
+
+@mixin playArea($columns) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  grid-template-rows: repeat($columns, 1fr);
+  align-items: center;
+  justify-items: center;
+
+  width: 327px;
+  margin-top: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  aspect-ratio: 1 / 1;
+
+  @include respond-to("small") {
+    width: 532px;
+  }
+}
+
+.playArea4 {
+  @include playArea(4);
+}
+
+.playArea6 {
+  @include playArea(6);
+}

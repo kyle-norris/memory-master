@@ -1,14 +1,14 @@
 export function generateGrid(size) {
   // The size param is the width/height of the grid
   // For instance, a 4x4 grid should be size=4
-  var all_values = Array(size * 2)
+  var all_values = Array((size * size) / 2)
     .fill()
     .map((x, i) => i);
 
   all_values.push(...all_values);
   var shuffled = shuffleArray(all_values);
 
-  return shuffled.map((i) => ({ value: i, visible: false }));
+  return shuffled.map((i) => i);
 }
 
 // This is the Fisher-Yates algorithm for shuffling

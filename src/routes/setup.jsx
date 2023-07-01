@@ -6,7 +6,7 @@ function Setup() {
   const [gameSettings, setGameSettings] = useState({
     theme: "numbers",
     players: 1,
-    grid: 4,
+    size: 4,
   });
 
   function setTheme(theme) {
@@ -17,15 +17,15 @@ function Setup() {
     setGameSettings({ ...gameSettings, players: players });
   }
 
-  function setGrid(grid) {
-    setGameSettings({ ...gameSettings, grid: grid });
+  function setSize(size) {
+    setGameSettings({ ...gameSettings, size: size });
   }
 
   function buildGameRoute() {
     var route = "game";
     route += `?theme=${gameSettings.theme}`;
-    route += `?players=${gameSettings.players}`;
-    route += `?grid=${gameSettings.grid}`;
+    route += `&players=${gameSettings.players}`;
+    route += `&size=${gameSettings.size}`;
     return route;
   }
 
@@ -77,21 +77,21 @@ function Setup() {
           <div className={`${styles.buttonRow} ${styles.row3}`}>
             <button
               className={
-                gameSettings.grid == 4
+                gameSettings.size == 4
                   ? "menuSelection active"
                   : "menuSelection"
               }
-              onClick={() => setGrid(4)}
+              onClick={() => setSize(4)}
             >
               4x4
             </button>
             <button
               className={
-                gameSettings.grid == 6
+                gameSettings.size == 6
                   ? "menuSelection active"
                   : "menuSelection"
               }
-              onClick={() => setGrid(6)}
+              onClick={() => setSize(6)}
             >
               6x6
             </button>

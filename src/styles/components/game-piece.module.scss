@@ -1,0 +1,82 @@
+@import "../globals/variables";
+@import "../globals/mixins";
+
+@mixin container($fontsizeSmall, $fontsizeBig, $sizeSmall, $sizeBig) {
+  position: relative;
+  height: $sizeSmall;
+  width: $sizeSmall;
+
+  @include respond-to("small") {
+    height: $sizeBig;
+    width: $sizeBig;
+  }
+
+  & > .circle, .circleSelected {
+    font-size: $fontsizeSmall;
+
+    @include respond-to("small") {
+      font-size: $fontsizeBig;
+    }
+  }
+}
+
+.container4 {
+  @include container(
+    40px, 56px, 72.5px, 118px
+  )
+}
+
+.container6 {
+  @include container(
+    24px, 44px, 46.9px, 82px
+  )
+}
+
+
+@mixin circleProperties($backgroundColor) {
+  border-radius: 50%;
+  color: $very-light-gray;
+  font-size: 40px;
+  height: 100%;
+  width: 100%;
+  background-color: $backgroundColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  @include respond-to("small") {
+    font-size: 56px;
+  }
+
+  transition: all 0.1s ease-in-out;
+}
+
+.circle {
+  @include circleProperties($gray-blue);
+}
+
+.circleSelected {
+  @include circleProperties($vivid-orange);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  background-color: $desaturated-blue;
+  transition: all 0.1s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $slightly-desaturated-blue;
+  }
+
+  &.reveal {
+    width: 0;
+    left: 50%;
+  }
+}
