@@ -1,0 +1,14 @@
+@import "../globals/variables";
+@import "../globals/mixins";
+
+
+.container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.player {
+  &.active {
+    color: rgb(37, 33, 227);
+  }
+}
