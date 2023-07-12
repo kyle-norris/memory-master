@@ -84,7 +84,10 @@ const reducer = (state, action) => {
 function Game() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [timer, isTargetAchieved] = useTimer({ target: { hours: 1 } });
+  const [timer, isTargetAchieved] = useTimer({
+    target: { hours: 1 },
+    updateWhenTargetAchieved: true,
+  });
 
   let query = useQuery();
   const timeout = useRef(null);
@@ -99,6 +102,12 @@ function Game() {
     let queryPlayers = query.get("players") ? Number(query.get("players")) : 1;
     return [1, 2, 3, 4].includes(queryPlayers) ? queryPlayers : 1;
   }, [query]);
+
+  const getTheme = () => {
+    let queryTheme = query.get("theme") ? query.get("theme") : "numbers";
+    return ["numbers", "icons"].includes(queryTheme) ? queryTheme : "numbers";
+  };
+  const theme = getTheme();
 
   useEffect(() => {
     const size = getSize();
@@ -126,15 +135,9 @@ function Game() {
       dispatch({ type: "CHECK_MATCH" });
       timeout.current = setTimeout(() => {
         nextPlayer();
-      }, 2000);
+      }, 1500);
     }
   }, [state.selectedPieces]);
-
-  useEffect(() => {
-    if (isTargetAchieved) {
-      console.log("END MATCH");
-    }
-  }, [isTargetAchieved]);
 
   function restartGame() {
     window.location.reload();
@@ -184,8 +187,9 @@ function Game() {
 
   const isGameOver = () => {
     return (
-      state.matchedPieces.length == state.pieces.length ||
-      (state.players.length == 1 && isTargetAchieved)
+      state.players.length > 0 &&
+      (state.matchedPieces.length == state.pieces.length ||
+        (state.players.length == 1 && isTargetAchieved))
     );
   };
 
@@ -232,6 +236,7 @@ function Game() {
         selectPiece={handlePieceClick}
         isVisible={isVisible}
         isSelected={isSelected}
+        theme={theme}
       />
       {state.players.length == 1 ? (
         <SinglePlayer time={timer.getTimeValues()} moves={state.moves} />
@@ -249,6 +254,7 @@ function Game() {
           moves={state.moves}
           restartGame={restartGame}
           newGame={newGame}
+          timeout={isTargetAchieved && state.players.length == 1}
         />
       ) : null}
     </div>

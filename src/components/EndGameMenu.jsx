@@ -2,7 +2,7 @@ import styles from "../styles/components/end-game-menu.module.scss";
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 
-function EndGameMenu({ scores, time, moves, restartGame, newGame }) {
+function EndGameMenu({ scores, time, moves, restartGame, newGame, timeout }) {
   const [winners, setWinners] = useState([]);
   const [playersAndScores, setPlayersAndScores] = useState([]);
   const singlePlayer = scores.length == 1;
@@ -40,15 +40,30 @@ function EndGameMenu({ scores, time, moves, restartGame, newGame }) {
       <div className={styles.card}>
         {singlePlayer ? (
           <>
-            <h1>You did it!</h1>
-            <p>Game over! Here&apos;s how you got on...</p>
+            {timeout ? (
+              <>
+                <h1>Time Limit!</h1>
+                <p>You took too long...</p>
+              </>
+            ) : (
+              <>
+                <h1>You did it!</h1>
+                <p>Game over! Here&apos;s how you got on...</p>
+              </>
+            )}
 
             <div className={styles.infoSingle}>
               <div className={styles.infoCard}>
                 <div>Time Elapsed</div>
                 <div className={styles.info}>
-                  {time.minutes.toString()}:
-                  {time.seconds.toString().padStart(2, "0")}
+                  {timeout ? (
+                    <>60:00</>
+                  ) : (
+                    <>
+                      {time.minutes.toString()}:
+                      {time.seconds.toString().padStart(2, "0")}
+                    </>
+                  )}
                 </div>
               </div>
               <div className={styles.infoCard}>
@@ -99,6 +114,7 @@ EndGameMenu.propTypes = {
   moves: PropTypes.number,
   restartGame: PropTypes.func,
   newGame: PropTypes.func,
+  timeout: PropTypes.bool,
 };
 
 export default EndGameMenu;

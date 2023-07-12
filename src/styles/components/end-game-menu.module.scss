@@ -24,6 +24,7 @@
   @include respond-to("small") {
     padding: 51px 56px 69px 56px;
     width: 654px;
+    border-radius: 20px;
   }
 }
 
