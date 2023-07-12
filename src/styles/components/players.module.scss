@@ -4,11 +4,120 @@
 
 .container {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  margin-top: 102px;
+  max-width: 327px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @include respond-to("small") {
+    max-width: 100%;
+  }
 }
 
 .player {
+  width: 64px;
+  height: 70px;
+  background-color: $light-gray;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  line-height: 19px;
+  color: $desaturated-light-blue;
+  position: relative;
+  margin-left: 11px;
+  margin-right: 11px;
+  margin-bottom: 100px;
+
+  @include respond-to("small") {
+    width: 255px;
+    height: 80px;
+    border-radius: 10px;
+    align-items: start;
+    padding: 0 24px 0 21px;
+    font-size: 15px;
+    line-height: 19px;
+  }
+
+  @include respond-to("medium") {
+    height: 72px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  & > .score {
+    font-size: 24px;
+    line-height: 30px;
+    color: $desaturated-blue;
+
+    @include respond-to("small") {
+      font-size: 24px;
+      line-height: 30px;
+    }
+
+    @include respond-to("medium") {
+      font-size: 32px;
+      line-height: 40px;
+    }
+  }
+
   &.active {
-    color: rgb(37, 33, 227);
+    color: $very-light-gray;
+    background-color: $vivid-orange;
+
+    & > .score {
+      color: $very-light-gray;
+    }
+
+    &:before {
+      // Triangle
+      content: "";
+      position: absolute;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 8px solid $vivid-orange;
+      top: -8px;
+      left: calc(50% - 8px);
+
+      @include respond-to("small") {
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+        border-bottom: 12px solid $vivid-orange;
+        top: -12px;
+        left: calc(50% - 12px);
+      }
+
+      @include respond-to("medium") {
+        border-left: 19px solid transparent;
+        border-right: 19px solid transparent;
+        border-bottom: 19px solid $vivid-orange;
+        top: -19px;
+        left: calc(50% - 19px);
+      }
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: calc(100% + 23px);
+      left: 0;
+      width: 100%;
+      text-align: center;
+      color: $very-dark-blue;
+      font-size: 13px;
+      line-height: 16px;
+      letter-spacing: 5px;
+
+      @include respond-to("medium") {
+        content: "CURRENT TURN";
+      }
+    }
+
   }
 }

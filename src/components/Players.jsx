@@ -1,5 +1,6 @@
 import styles from "../styles/components/players.module.scss";
 import PropTypes from "prop-types";
+import { Desktop, Mobile } from "../breakpoints";
 
 function Players({ players, isTurn, scores }) {
   return (
@@ -13,8 +14,13 @@ function Players({ players, isTurn, scores }) {
           }
           key={idx}
         >
-          {player}
-          <div>Score: {scores[idx]}</div>
+          <Mobile>
+            <div>P{player}</div>
+          </Mobile>
+          <Desktop>
+            <div>Player {player}</div>
+          </Desktop>
+          <div className={styles.score}>{scores[idx]}</div>
         </div>
       ))}
     </div>

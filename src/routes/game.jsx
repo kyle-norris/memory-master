@@ -7,6 +7,8 @@ import GameGrid from "../components/GameGrid";
 import { useLocation } from "react-router-dom";
 import React from "react";
 import Players from "../components/Players";
+import SinglePlayer from "../components/SinglePlayer";
+import useTimer from "easytimer-react-hook";
 
 function useQuery() {
   const { search } = useLocation();
@@ -20,6 +22,7 @@ const initialState = {
   currentPlayer: 1,
   scores: [],
   players: [],
+  moves: 0, // only used for 1-person game
 };
 
 const reducer = (state, action) => {
@@ -56,6 +59,7 @@ const reducer = (state, action) => {
         updatedState.scores = newScores;
         updatedState.matchedPieces = [...state.matchedPieces, idx1, idx2];
       }
+      updatedState.moves += 1;
       return updatedState;
     }
     case "NEXT_PLAYER": {
@@ -78,6 +82,7 @@ const reducer = (state, action) => {
 function Game() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [timer, isTargetAchieved] = useTimer({ target: { hours: 1 } });
 
   let query = useQuery();
   const timeout = useRef(null);
@@ -108,16 +113,25 @@ function Game() {
       scores: scores,
       pieces: pieces,
     });
-  }, [query, getSize, getNumPlayers]);
+    if (numPlayers == 1) {
+      timer.start();
+    }
+  }, [query, getSize, getNumPlayers, timer]);
 
   useEffect(() => {
     if (state.selectedPieces.length == 2) {
       dispatch({ type: "CHECK_MATCH" });
       timeout.current = setTimeout(() => {
         nextPlayer();
-      }, 2000);
+      }, 1000);
     }
   }, [state.selectedPieces]);
+
+  useEffect(() => {
+    if (isTargetAchieved) {
+      console.log("END MATCH");
+    }
+  }, [isTargetAchieved]);
 
   function restartGame() {
     return null;
@@ -142,7 +156,8 @@ function Game() {
     return (
       !state.matchedPieces.includes(idx) &&
       !state.selectedPieces.includes(idx) &&
-      state.selectedPieces.length < 2
+      state.selectedPieces.length < 2 &&
+      !isTargetAchieved
     );
   };
 
@@ -198,7 +213,15 @@ function Game() {
         isVisible={isVisible}
         isSelected={isSelected}
       />
-      <Players players={state.players} isTurn={isTurn} scores={state.scores} />
+      {state.players.length == 1 ? (
+        <SinglePlayer time={timer.getTimeValues()} moves={state.moves} />
+      ) : (
+        <Players
+          players={state.players}
+          isTurn={isTurn}
+          scores={state.scores}
+        />
+      )}
     </div>
   );
 }
