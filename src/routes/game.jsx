@@ -1,7 +1,7 @@
 import styles from "../styles/components/game.module.scss";
 import { Desktop, Mobile } from "../breakpoints";
 import { useState, useEffect, useReducer, useRef, useCallback } from "react";
-import MobileMenu from "../components/mobileMenu";
+import MobileMenu from "../components/MobileMenu";
 import { generateGrid } from "../utils/game-logic";
 import GameGrid from "../components/GameGrid";
 import { useLocation } from "react-router-dom";
