@@ -1,0 +1,141 @@
+@import "../globals/variables";
+@import "../globals/mixins";
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(1, 1, 1, 0.5);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  background-color: $very-light-gray;
+  margin: 24px;
+  width: 450px;
+  border-radius: 10px;
+  text-align: center;
+  padding: 32px 24px 24px 24px;
+
+  @include respond-to("small") {
+    padding: 51px 56px 69px 56px;
+    width: 654px;
+  }
+}
+
+p {
+  color: $desaturated-light-blue;
+  line-height: 17px;
+  margin-top: 9px;
+
+  @include respond-to("small") {
+    margin-top: 16px;
+  }
+}
+
+h1 {
+  color: $very-dark-blue;
+}
+
+.infoSingle {
+  margin-top: 24px; 
+
+  @include respond-to("small") {
+    margin-top: 40px;
+  }
+}
+
+.infoCard {
+  background-color: $light-gray;
+  display: flex;
+  justify-content: space-between;
+  height: 48px;
+  border-radius: 5px;
+  align-items: center;
+  color: $desaturated-light-blue;
+  font-size: 13px;
+  padding: 0 16px;
+  margin-top: 8px;
+
+  &:not(.winner) > .info {
+    color: $desaturated-blue;
+  }
+
+  & > .info {
+    font-size: 20px;
+    @include respond-to("small") {
+      font-size: 32px;
+    }
+  }
+
+  &.winner {
+    background-color: $desaturated-blue;
+    color: $very-light-gray;
+  }
+
+  @include respond-to("small") {
+    height: 72px;
+    margin-top: 16px;
+    font-size: 18px;
+    border-radius: 10px;
+    padding: 0 32px;
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+  height: 16px + 48px + 48px;
+  justify-content: space-between;
+
+  @include respond-to("small") {
+    flex-direction: row;
+    margin-top: 56px;
+    justify-content: space-between;
+    height: auto;
+  }
+}
+
+.btn1 {
+  height: 48px;
+  width: 100%;
+  border-radius: 26px;
+  background-color: $vivid-orange;
+  font-size: 18px;
+  color: $very-light-gray;
+
+  &:hover {
+    background-color: $light-orange;
+  }
+
+  @include respond-to("small") {
+    width: 264px;
+    font-size: 22px;
+    height: 52px;
+  }
+}
+
+.btn2 {
+  height: 48px;
+  width: 100%;
+  border-radius: 26px;
+  background-color: $light-gray;
+  font-size: 18px;
+  color: $desaturated-blue;
+
+  &:hover {
+    background-color: $slightly-desaturated-blue;
+    color: $very-light-gray;
+  }
+
+  @include respond-to("small") {
+    width: 264px;
+    font-size: 22px;
+    height: 52px;
+  }
+}

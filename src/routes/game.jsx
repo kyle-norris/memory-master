@@ -9,6 +9,8 @@ import React from "react";
 import Players from "../components/Players";
 import SinglePlayer from "../components/SinglePlayer";
 import useTimer from "easytimer-react-hook";
+import { useNavigate } from "react-router-dom";
+import EndGameMenu from "../components/EndGameMenu";
 
 function useQuery() {
   const { search } = useLocation();
@@ -86,6 +88,7 @@ function Game() {
 
   let query = useQuery();
   const timeout = useRef(null);
+  const navigate = useNavigate();
 
   const getSize = useCallback(() => {
     let querySize = query.get("size") ? Number(query.get("size")) : 4;
@@ -123,7 +126,7 @@ function Game() {
       dispatch({ type: "CHECK_MATCH" });
       timeout.current = setTimeout(() => {
         nextPlayer();
-      }, 1000);
+      }, 2000);
     }
   }, [state.selectedPieces]);
 
@@ -134,11 +137,11 @@ function Game() {
   }, [isTargetAchieved]);
 
   function restartGame() {
-    return null;
+    window.location.reload();
   }
 
   function newGame() {
-    return null;
+    navigate("/", { replace: false });
   }
 
   const nextPlayer = () => {
@@ -147,17 +150,21 @@ function Game() {
 
   useEffect(() => {
     if (state.matchedPieces.length > 0) {
-      clearTimeout(timeout.current);
-      nextPlayer();
+      if (state.matchedPieces.length == state.pieces.length) {
+        timer.pause();
+      } else {
+        clearTimeout(timeout.current);
+        nextPlayer();
+      }
     }
-  }, [state.matchedPieces]);
+  }, [state.matchedPieces, state.pieces, timer]);
 
   const isClickable = (idx) => {
     return (
+      !isTargetAchieved &&
       !state.matchedPieces.includes(idx) &&
       !state.selectedPieces.includes(idx) &&
-      state.selectedPieces.length < 2 &&
-      !isTargetAchieved
+      state.selectedPieces.length < 2
     );
   };
 
@@ -175,6 +182,13 @@ function Game() {
     return state.currentPlayer == player;
   };
 
+  const isGameOver = () => {
+    return (
+      state.matchedPieces.length == state.pieces.length ||
+      (state.players.length == 1 && isTargetAchieved)
+    );
+  };
+
   const handlePieceClick = (idx) => {
     if (!isClickable(idx)) return;
     dispatch({ type: "SELECT_PIECE", piece: idx });
@@ -183,7 +197,9 @@ function Game() {
   return (
     <div className={styles.background}>
       <header>
-        <div>memory</div>
+        <div onClick={newGame} style={{ cursor: "pointer" }}>
+          memory
+        </div>
         <Mobile>
           <button
             className="primary--small"
@@ -201,8 +217,12 @@ function Game() {
         </Mobile>
         <Desktop>
           <div className={styles.menuBtns}>
-            <button className={styles.menuBtn1}>Restart</button>
-            <button className={styles.menuBtn2}>New Game</button>
+            <button className={styles.menuBtn1} onClick={restartGame}>
+              Restart
+            </button>
+            <button className={styles.menuBtn2} onClick={newGame}>
+              New Game
+            </button>
           </div>
         </Desktop>
       </header>
@@ -222,6 +242,15 @@ function Game() {
           scores={state.scores}
         />
       )}
+      {isGameOver() ? (
+        <EndGameMenu
+          scores={state.scores}
+          time={timer.getTimeValues()}
+          moves={state.moves}
+          restartGame={restartGame}
+          newGame={newGame}
+        />
+      ) : null}
     </div>
   );
 }

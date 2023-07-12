@@ -1,7 +1,11 @@
 @import "./mixins";
 
 h1 {
-  font-size: 48px;
+  font-size: 24px;
+
+  @include respond-to("small") {
+    font-size: 48px;
+  }
 }
 
 h2 {
@@ -17,5 +21,9 @@ h3 {
 }
 
 p {
-  font-size: 18px;
+  font-size: 14px;
+
+  @include respond-to("small") {
+    font-size: 18px;
+  }
 }
