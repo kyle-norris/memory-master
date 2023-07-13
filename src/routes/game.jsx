@@ -200,63 +200,65 @@ function Game() {
 
   return (
     <div className={styles.background}>
-      <header>
-        <div onClick={newGame} style={{ cursor: "pointer" }}>
-          memory
-        </div>
-        <Mobile>
-          <button
-            className="primary--small"
-            onClick={() => setShowMobileMenu(true)}
-          >
-            Menu
-          </button>
-          {showMobileMenu ? (
-            <MobileMenu
-              restart={restartGame}
-              newGame={newGame}
-              resume={() => setShowMobileMenu(false)}
-            />
-          ) : null}
-        </Mobile>
-        <Desktop>
-          <div className={styles.menuBtns}>
-            <button className={styles.menuBtn1} onClick={restartGame}>
-              Restart
-            </button>
-            <button className={styles.menuBtn2} onClick={newGame}>
-              New Game
-            </button>
+      <div className={styles.gameContainer}>
+        <header>
+          <div onClick={newGame} style={{ cursor: "pointer" }}>
+            memory
           </div>
-        </Desktop>
-      </header>
-      <GameGrid
-        grid={state.pieces}
-        size={getSize()}
-        selectPiece={handlePieceClick}
-        isVisible={isVisible}
-        isSelected={isSelected}
-        theme={theme}
-      />
-      {state.players.length == 1 ? (
-        <SinglePlayer time={timer.getTimeValues()} moves={state.moves} />
-      ) : (
-        <Players
-          players={state.players}
-          isTurn={isTurn}
-          scores={state.scores}
+          <Mobile>
+            <button
+              className="primary--small"
+              onClick={() => setShowMobileMenu(true)}
+            >
+              Menu
+            </button>
+            {showMobileMenu ? (
+              <MobileMenu
+                restart={restartGame}
+                newGame={newGame}
+                resume={() => setShowMobileMenu(false)}
+              />
+            ) : null}
+          </Mobile>
+          <Desktop>
+            <div className={styles.menuBtns}>
+              <button className={styles.menuBtn1} onClick={restartGame}>
+                Restart
+              </button>
+              <button className={styles.menuBtn2} onClick={newGame}>
+                New Game
+              </button>
+            </div>
+          </Desktop>
+        </header>
+        <GameGrid
+          grid={state.pieces}
+          size={getSize()}
+          selectPiece={handlePieceClick}
+          isVisible={isVisible}
+          isSelected={isSelected}
+          theme={theme}
         />
-      )}
-      {isGameOver() ? (
-        <EndGameMenu
-          scores={state.scores}
-          time={timer.getTimeValues()}
-          moves={state.moves}
-          restartGame={restartGame}
-          newGame={newGame}
-          timeout={isTargetAchieved && state.players.length == 1}
-        />
-      ) : null}
+        {state.players.length == 1 ? (
+          <SinglePlayer time={timer.getTimeValues()} moves={state.moves} />
+        ) : (
+          <Players
+            players={state.players}
+            isTurn={isTurn}
+            scores={state.scores}
+          />
+        )}
+        {isGameOver() ? (
+          <EndGameMenu
+            scores={state.scores}
+            time={timer.getTimeValues()}
+            moves={state.moves}
+            restartGame={restartGame}
+            newGame={newGame}
+            timeout={isTargetAchieved && state.players.length == 1}
+          />
+        ) : null}
+      </div>
     </div>
   );
 }
