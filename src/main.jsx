@@ -18,7 +18,7 @@ const router = createHashRouter(
       element: <Game />,
     },
   ],
-  { basename: import.meta.env.DEV ? "/" : "/memory-master/" }
+  { basename: "/" }
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
