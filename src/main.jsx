@@ -6,17 +6,20 @@ import "./styles/index.scss";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./error-page.jsx";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Setup />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/game",
-    element: <Game />,
-  },
-]);
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <Setup />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/game",
+      element: <Game />,
+    },
+  ],
+  { basename: import.meta.env.DEV ? "/" : "/memory-master/" }
+);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
