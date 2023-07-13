@@ -199,12 +199,12 @@ function Game() {
   };
 
   return (
-    <div className={styles.background}>
+    <div className={styles.background} role="main">
       <div className={styles.gameContainer}>
-        <header>
-          <div onClick={newGame} style={{ cursor: "pointer" }}>
+        <header role="banner">
+          <h1 onClick={newGame} style={{ cursor: "pointer" }}>
             memory
-          </div>
+          </h1>
           <Mobile>
             <button
               className="primary--small"

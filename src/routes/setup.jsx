@@ -30,8 +30,8 @@ function Setup() {
   }
 
   return (
-    <div className={styles.background}>
-      <div className={styles.title}>memory</div>
+    <div className={styles.background} role="main">
+      <h1 className={styles.title}>memory</h1>
       <div className={styles.card}>
         <div className={styles.row}>
           <h3>Select Theme</h3>
