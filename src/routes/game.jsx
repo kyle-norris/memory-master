@@ -199,38 +199,38 @@ function Game() {
   };
 
   return (
-    <div className={styles.background} role="main">
-      <div className={styles.gameContainer}>
-        <header role="banner">
-          <h1 onClick={newGame} style={{ cursor: "pointer" }}>
-            memory
-          </h1>
-          <Mobile>
-            <button
-              className="primary--small"
-              onClick={() => setShowMobileMenu(true)}
-            >
-              Menu
+    <div className={styles.background}>
+      <header role="banner">
+        <h1 onClick={newGame} style={{ cursor: "pointer" }}>
+          memory
+        </h1>
+        <Mobile>
+          <button
+            className="primary--small"
+            onClick={() => setShowMobileMenu(true)}
+          >
+            Menu
+          </button>
+          {showMobileMenu ? (
+            <MobileMenu
+              restart={restartGame}
+              newGame={newGame}
+              resume={() => setShowMobileMenu(false)}
+            />
+          ) : null}
+        </Mobile>
+        <Desktop>
+          <div className={styles.menuBtns}>
+            <button className={styles.menuBtn1} onClick={restartGame}>
+              Restart
             </button>
-            {showMobileMenu ? (
-              <MobileMenu
-                restart={restartGame}
-                newGame={newGame}
-                resume={() => setShowMobileMenu(false)}
-              />
-            ) : null}
-          </Mobile>
-          <Desktop>
-            <div className={styles.menuBtns}>
-              <button className={styles.menuBtn1} onClick={restartGame}>
-                Restart
-              </button>
-              <button className={styles.menuBtn2} onClick={newGame}>
-                New Game
-              </button>
-            </div>
-          </Desktop>
-        </header>
+            <button className={styles.menuBtn2} onClick={newGame}>
+              New Game
+            </button>
+          </div>
+        </Desktop>
+      </header>
+      <div className={styles.gameContainer} role="main">
         <GameGrid
           grid={state.pieces}
           size={getSize()}
