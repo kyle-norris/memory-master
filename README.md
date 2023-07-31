@@ -1,16 +1,20 @@
 # Memory Master
-View the live site here: https://kyle-norris.github.io/memory-master/
-\
-\
+[![Netlify Status](https://api.netlify.com/api/v1/badges/676db11a-487c-4e57-a34c-f215970db128/deploy-status)](https://app.netlify.com/sites/incredible-starlight-9381a1/deploys)
+<br/>
+View the live site here: [memory-master.kylecode.com](memory-master.kylecode.com)
+<br/><br/>
 This is a project based on a FrontendMentor.io [challenge](https://www.frontendmentor.io/challenges/memory-game-vse4WFPvM). 
 It's a memory game, configurable up to 4 players, in which the players must find matching pairs of numbers or symbols. 
 The game board size can also be configured to be 4x4 or 6x6.
-\
-\
-I created the project using vite, React, and SCSS. 
-I also used React Router to separate the setup screen (at route "/") from the game screen (at route "/game") and added query parameters to the game screen.
-This allows me to navigate to a game with preconfigured settings using the query parameters. For example, if I want a game with icons, 2 players, and size 4x4, 
-I can nagivate to https://kyle-norris.github.io/memory-master/#/game?theme=icons&players=2&size=4.
-\
-\
-![preview](https://github.com/kyle-norris/memory-master/assets/69487602/d14ed160-3f78-4b6a-89d5-34dae4fb8141)
+<br/>
+<br/>
+
+## Tech Stack
+- React
+- Vite
+- SCSS
+
+## Deployment
+Automatically deploys to Netlify from _main_ and _dev_ branches.
+- _main_ deploys to production ([memory-master.kylecode.com](memory-master.kylecode.com))
+- _dev_ deploys to a staging domain on Netlify
